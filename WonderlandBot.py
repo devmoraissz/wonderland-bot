@@ -4,6 +4,24 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import os
 
+# 🔹 Importações para manter o bot online no Render
+from flask import Flask
+from threading import Thread
+
+# Mini servidor Flask
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot está rodando no Render!"
+
+def run():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
+
 # Carregar as variáveis do arquivo .env
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -138,6 +156,8 @@ async def termos(ctx):
 
     await ctx.send(embed=embed)
 
-
-bot.run(TOKEN)
+# 🔹 Iniciar o servidor Flask + Bot
+if __name__ == "__main__":
+    keep_alive()
+    bot.run(TOKEN)
 
