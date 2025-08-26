@@ -150,7 +150,7 @@ async def termos(ctx):
     # Assinatura final
     embed.add_field(
         name="\u200b",
-        value="**Com carinho,**\n**Equipe Wonderland Store ❤️**",
+        value="**Com carinho,**\n**Equipe Wonderland Store <a:heart_88:1308058466035957830> **",
         inline=False
     )
 
